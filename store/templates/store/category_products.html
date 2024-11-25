@@ -1,0 +1,55 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+<div class="container pt-3 min-vh-100">
+    <h4>{{ category }}</h4>
+    <hr class="hr" />
+    <div class="row card-group">
+        {% for item in page %}
+        <div class="col-3 my-3">
+            <div class="card h-100">
+                <img src="{{ item.image.url }}" alt="image" class="card-img-top" style="height: 200px;">
+                <div class="card-body">
+                    <ul class="list-inline">
+                        <li>
+                            <a class="card-title text-decoration-none">{{ item.name }}</a>
+                        </li>
+                        <li><small class="text-muted">{{ item.category }}</small></li>
+                    </ul>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <div>
+                        <a class="btn btn-sm btn-outline-primary" href="{% url 'cart_action' item.pk %}?action=add">Add to cart</a>
+                        <a class="btn btn-sm btn-outline-success" href="{% url 'product' item.pk %}">View</a>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-primary">${{ item.price }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <span>There is no product assigned to this category.</span>
+        {% endfor %}  
+    </div>
+
+    {% if page %}
+    <nav aria-label="pagination">
+        <ul class="pagination justify-content-center">
+            {% if page.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page=1">First</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ page.previous_page_number }}">Previous</a></li>
+            {% endif %} 
+
+            <li class="page-item"><a class="page-link" href="#">page {{ page.number }} of {{ page.paginator.num_pages}}</a></li>
+
+            {% if page.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ page.next_page_number }}">Next</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ page.paginator.num_pages }}">Last</a></li>
+            {% endif %} 
+        </ul>
+    </nav>
+    {% endif %}
+
+</div>
+{% endblock %}

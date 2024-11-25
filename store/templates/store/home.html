@@ -1,0 +1,79 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+
+{% block content %}
+    <div class="slider">
+        <img src="{% static 'store/images/s1.jpg' %}" class="slide">
+        <img src="{% static 'store/images/s2.png' %}" class="slide">
+        <img src="{% static 'store/images/s3.jpg' %}" class="slide">
+        <img src="{% static 'store/images/s4.jpg' %}" class="slide">
+    </div>
+<div class="container pt-3 min-vh-100">
+    <h4 style="margin:2rem 0; text-align:center;">We recommend</h4>
+    <hr class="hr" />
+    <div class="row card-group" style="display: grid;
+        grid-template-columns: repeat(auto-fit, 20rem);
+        gap:1.5rem;
+        align-items: flex-start;
+        justify-content: center;
+        height:auto;
+        margin-left: 3rem">
+        {% for item in products %}
+        <div class="col-3 my-3" style="background-color: var(--white);
+            border-radius: .5rem;
+            padding:.5rem;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            position: relative;
+            width: 16rem;
+            height: auto-fit;">
+            <div class="card h-100">
+                <img src="{{ item.image.url }}" alt="image" class="card-img-top" style="width: 100%;
+                    margin-bottom: 1rem;">
+                <div class="card-body">
+                    <ul class="list-inline" style="list-style: none;">
+                        <li><a class="card-title text-decoration-none">{{ item.name }}</a></li>
+                        <li><small class="text-muted">{{ item.category }}</small></li>
+                        <li><center><p class="text-primary" style="border-radius: .3rem; background-color: black; color:white; height:1.5rem; width: auto-fit; margin-top:.5rem" >${{ item.price }}</p></center></li>
+                    </ul>
+                </div>
+
+                <div class="card-footer d-flex justify-content-between">
+                    <div style="display:flex; justify-content:space-between;margin: 1rem 1rem;">
+                        <a class="btn btn-sm btn-outline-success" href="{% url 'product' item.pk %}" style="border-radius: .3rem; background-color: blue; color:white; height:1.5rem; width: 4rem;" >View</a>
+                        <a class="btn btn-sm btn-outline-primary" href="{% url 'cart_action' item.pk %}?action=add" style="border-radius: .3rem; background-color: blue; color:white; height:1.5rem; width: 6rem;">Add to cart</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <span>Add a product using the admin panel and check is_recommended = True to make it appear here.</span>
+        {% endfor %}
+    </div>
+    <footer>
+        <div class="footer-left">
+            <div>
+                <a style="font-size:.8rem;"></a>
+                <a style="text-decoration:underline;">Contact :</a>
+            </div>
+            <div>
+                <a class="fas fa-location"></a>
+                <a>  xyz street,Hosur,Tamilnadu-635109</a>
+            </div>
+            <div>
+                <a class="fas fa-phone"></a>
+                <a>  +91 9876543210</a>
+            </div>
+            <div>
+                <a class="fas fa-envelope"></a>
+                <a>  a1pizzainfo@gmail.com</a>
+            </div>
+        </div>
+        <div class="footer-reight">
+
+        </div>
+    </footer>
+</div>
+{% endblock %}

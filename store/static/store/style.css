@@ -1,0 +1,317 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;800&display=swap');
+
+:root{
+   --red:#e74c3c;
+   --black:#333;
+   --white:#fff;
+   --light-bg:#f5f5f5;
+   --light-color:#666;
+   --border:.1rem solid var(--light-color);
+   --box-shadow:0 .5rem 1rem rgba(0,0,0,.1);
+}
+
+*{
+   font-family: 'Nunito', sans-serif;
+   margin:0; padding:0;
+   box-sizing: border-box;
+   outline: none; border:none;
+   text-decoration: none;
+   transition: .2s linear;
+}
+
+body{
+   background: var(--light-bg);
+
+
+}
+
+.header{
+   background-color: black;
+   text-color: white;
+   box-shadow: var(--box-shadow);
+   display: flex;
+   height: 5rem;
+   align-items: center;
+   margin-bottom: .2rem;
+   justify-content: space-between;
+   font-size: 20px
+}
+
+.navbar-brand{
+    padding-left: 40px;
+}
+
+.input-group input{
+    height: 2rem;
+    width: 15rem;
+}
+
+.input-group button{
+    height: 2rem;
+    width: 5rem;
+    background-color: rgb(5, 108, 193);
+    color:white;
+}
+
+.input-group button:hover{
+    background-color: green;
+    color:white;
+}
+
+.nav-link{
+    margin-left: -10rem;
+}
+
+.fas{
+    padding-right: 20px
+}
+
+.fas a{
+    padding-right: 20px
+}
+
+footer{
+    background-color: black;
+    color: white;
+    height: 5rem;
+    display: flex;
+    margin-top:5rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.footer-left{
+    font-size: .9rem;
+    margin-left: 2rem
+}
+
+
+.slider{
+    overflow: hidden;
+    height: 40vh;
+    width: 100%;
+}
+.slider img{
+    height: 40vh;
+    width: 100%;
+}
+
+.form-login{
+    margin-right:20rem;
+    box-shadow: var(--box-shadow);
+    border-radius: .5rem;
+    padding-top:.5rem;
+    padding-bottom: 2rem;
+}
+
+.form-login input{
+    height: 2rem;
+    border-radius: .2rem;
+}
+
+.form-login p{
+    margin:1rem;
+    display: grid;
+}
+
+.form-login button{
+    border-radius: .2rem;
+    background-color: blue;
+    color:white;
+    height:2rem;
+    width: 5rem;
+    margin-left: 20rem;
+    margin-top:.5rem;
+    cursor:pointer;
+}
+
+.form-login button:hover{
+    background-color: green;
+}
+
+.form-signup{
+    margin-right:20rem;
+    box-shadow: var(--box-shadow);
+    border-radius: .5rem;
+    padding-top:.5rem;
+    padding-bottom: 2rem;
+}
+
+.form-signup input{
+    height: 2rem;
+    border-radius: .2rem;
+}
+
+.form-signup p{
+    margin:1rem;
+    display: grid;
+}
+
+.form-signup button{
+    border-radius: .2rem;
+    background-color: blue;
+    color:white;
+    height:2rem;
+    width: 5rem;
+    margin-left: 20rem;
+    margin-top:.5rem;
+    cursor:pointer;
+}
+
+.form-signup button:hover{
+    background-color: green;
+}
+
+.form-signup li{
+    margin-left:1rem;
+    color:red;
+    list-style:none;
+    font-size:.8rem;
+}
+
+.form-profile{
+    margin-right:20rem;
+    box-shadow: var(--box-shadow);
+    border-radius: .5rem;
+    padding-top:.5rem;
+    padding-bottom: 2rem;
+}
+
+.form-profile input{
+    height: 2rem;
+    border-radius: .2rem;
+}
+
+.form-profile p{
+    margin:1rem;
+    display: grid;
+}
+
+.form-profile button{
+    border-radius: .2rem;
+    background-color: blue;
+    color:white;
+    height:2rem;
+    width: 5rem;
+    margin-left: 20rem;
+    margin-top:.5rem;
+}
+
+.form-profile button:hover{
+    background-color: green;
+}
+
+/* Basic table style */
+.table {
+    width: 70%;
+    margin-bottom: 1rem;
+    color: #212529;
+}
+
+/* Header style */
+.table thead {
+    background-color: #f8f9fa;
+    text-align: center;
+}
+
+.table thead th {
+    border-bottom: 2px solid #dee2e6;
+    font-weight: bold;
+    color: #495057;
+}
+
+/* Row styling */
+.table tbody tr:hover {
+    background-color: #f1f1f1; /* Hover effect for rows */
+}
+
+.table tbody tr {
+    transition: background-color 0.3s ease;
+}
+
+/* Cell styling */
+.table td, .table th {
+    vertical-align: middle;
+    padding: 12px;
+    text-align: center;
+}
+
+/* Product link */
+.table td a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.table td a:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
+
+/* Button styling for quantity controls */
+.input-group-btn a {
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.input-group-btn a:hover {
+    background-color: #e9ecef;
+}
+
+/* Remove button styling */
+.table td .text-danger {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.table td .text-danger:hover {
+    color: #a71d2a;
+}
+
+/* Responsive table */
+@media (max-width: 767px) {
+    .table thead {
+        display: none; /* Hide table header on small screens */
+    }
+    .table td {
+        display: block;
+        text-align: right;
+    }
+    .table td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        display: inline-block;
+        width: 50%;
+    }
+}
+
+.form-del{
+    margin-right:20rem;
+    box-shadow: var(--box-shadow);
+    border-radius: .5rem;
+    padding-top:.5rem;
+}
+
+.form-del input{
+    height: 2rem;
+    border-radius: .2rem;
+}
+
+.form-del p{
+    margin:1rem;
+    display: grid;
+}
+
+.form-del button{
+    border-radius: .2rem;
+    background-color: blue;
+    color:white;
+    height:2rem;
+    width: 6rem;
+    margin-left: 20rem;
+    margin-bottom: 1rem;
+}
+
+.form-del button:hover{
+    background-color: green;
+}

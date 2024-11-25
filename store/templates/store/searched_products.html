@@ -1,0 +1,36 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+<div class="container pt-3 min-vh-100">
+    <h4>Searched products</h4>
+    <hr class="hr" />
+    <div class="row card-group">
+        {% for item in products %}
+        <div class="col-3 my-3">
+            <div class="card h-100">
+                <img src="{{ item.image.url }}" alt="image" class="card-img-top" style="height: 200px;">
+                <div class="card-body">
+                    <ul class="list-inline">
+                        <li>
+                            <a class="card-title text-decoration-none">{{ item.name }}</a>
+                        </li>
+                        <li><small class="text-muted">{{ item.category }}</small></li>
+                    </ul>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <div>
+                        <a class="btn btn-sm btn-outline-primary" href="{% url 'cart_action' item.pk %}?action=add">Add to cart</a>
+                        <a class="btn btn-sm btn-outline-success" href="{% url 'product' item.pk %}">View</a>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-primary">${{ item.price }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <span>No product found.</span>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

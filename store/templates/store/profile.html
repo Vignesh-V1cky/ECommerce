@@ -1,0 +1,56 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+<div class="container pt-3 min-vh-100" style="margin-left:10rem">
+    <div class="my-3" style="display: flex; margin:1rem 0">
+        <h4 style="margin-right:2rem">My profile</h4>
+        <a href="{% url 'logout' %}" class="btn btn-outline-danger" style="border-radius: .2rem;
+    background-color: red;
+    color:white;
+    height:2rem;
+    width: 5rem;
+    text-align:center;
+    padding-top:4px;">Logout</a>
+    </div>
+
+
+    <hr class="hr" />
+    <form method="POST" action="{% url 'profile' %}" enctype="multipart/form-data" class="form-profile">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-outline-success">Change</button>
+    </form>
+
+    <h4 class="pt-3" style=" margin:1rem 0">My orders</h4>
+    <hr class="hr" />
+    {% for item in page %}
+    <div class="card my-3">
+        <div class="card-body">
+            <a class="btn btn-sm btn-outline-primary" href="{% url 'user_order' item.pk %}">Order number: #{{ item.pk }}</a>
+            <span>- {{ item.date_time_order }}</span>
+        </div>
+    </div>
+    {% empty %}
+    <span>Your order history is empty.</span>
+    {% endfor %}
+
+    {% if page %}
+    <nav aria-label="pagination">
+        <ul class="pagination justify-content-center">
+            {% if page.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page=1">First</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ page.previous_page_number }}">Previous</a></li>
+            {% endif %} 
+
+            <li class="page-item"><a class="page-link" href="#">{{ page.number }} of {{ page.paginator.num_pages}}</a></li>
+
+            {% if page.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ page.next_page_number }}">Next</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ page.paginator.num_pages }}">Last</a></li>
+            {% endif %} 
+        </ul>
+    </nav>
+    {% endif %}
+
+</div>
+{% endblock %}

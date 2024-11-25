@@ -1,0 +1,111 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+<div class="container pt-3 min-vh-100" style="margin: 2rem 2rem; display: grid;
+        grid-template-columns: repeat(auto-fit, 20rem);
+        gap:3rem;
+        align-items: flex-start;
+        justify-content: center;
+        height:auto;">
+    <div class="card my-3" style="background-color: var(--white);
+            border-radius: .5rem;
+            padding:.5rem;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            position: relative;
+            width: 16rem;
+            height: auto-fit;">
+        <div class="col-xs-9 col-sm-11 d-flex justify-content-center">
+            <img class="card-img-top"  src="{{ product.image.url }}" alt="image" style="width: 100%; margin-bottom: 1rem;">
+        </div>
+        <div class="card-body">
+            <h4 class="card-title">{{ product.name }}</h4>
+            <p class="text-metud">{{ opinions_average_rating }} ({{ opinions_count }} opinions)</p>
+            {% if product.description %}
+            <p>Description: {{ product.description }}</p>
+            {% endif %}
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+            <p><a class="btn btn-sm btn-outline-primary" href="{% url 'cart_action' product.pk %}?action=add">Add to cart</a></p>
+            <p class="text-primary">Price: ${{ product.price }}</p>
+        </div>
+    </div>
+    <div>
+    <h4 style="font-size:2rem;">Opinions</h4>
+    <hr class="hr" />
+
+    {% if not user_opinion %}
+    <form class="card my-1 bg-light" method="POST" action="{% url 'opinion' product.pk %}?action=add" enctype="multipart/form-data" style="box-shadow: var(--box-shadow);
+    border-radius: .5rem;
+    padding-left:1rem;
+    margin-left:-2rem;
+    height: 21rem;
+    padding-top:.5rem;">
+        {% csrf_token %}
+        <div class="card-body">
+            <h6 class="text-muted" style="font-size:1.5rem; margin-bottom:1rem;">Add opinion</h6>
+            <hr class="hr" />
+            <div class="mb-3" style="display:grid;">
+                <label for="content">Content:</label>
+                <textarea class="form-control" id="content" name="content" placeholder="Content" style="border-radius: .2rem; height: 8rem; margin:.5rem 1rem 1rem 0;"></textarea>
+              </div>
+              <label for="rating">Rating</label>
+              <select name="rating" class="form-select" id="rating" name="rating">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5" selected>5</option>
+              </select>
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+            <button class="btn btn-outline-primary" style="border-radius: .2rem;
+    background-color: blue;
+    color:white;
+    height:2rem;
+    width: 5rem;
+    margin-top:2rem;
+    text-align:center;">Add</button>
+        </div>
+    </form>
+     {% endif %}
+    </div>
+    {% for item in opinions %}
+    <div class="card my-1 bg-light"style="box-shadow: var(--box-shadow);
+    border-radius: .5rem;
+    padding:1rem;
+    margin-left:-2rem;
+    height: auto-fit;
+    margin-top: 2.7rem;
+    padding-top:.5rem;">
+        <div class="card-body">
+            <div class="d-flex justify-content-between">
+                <p class="text-muted">Rating: {{ item.rating }}</p>
+
+            </div>
+            {% if item.content %}
+            <p class="text-muted">Content: {{ item.content }}</p>
+            {% endif %}
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+            <p class="text-muted"> {{ item.user.username }}</p>
+            <p class="text-muted">{{ item.created_date_time }}</p>
+        </div>
+        {% if user_opinion.pk == item.pk %}
+                <form method="POST" action="{% url 'opinion' product.pk %}?action=remove" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <button class="btn btn-outline-danger" style="border-radius: .2rem;
+                    background-color: red;
+                    color:white;
+                    height:2rem;
+                    width: 5rem;
+                    margin-top:.5rem;
+                    text-align:center;">Remove</button>
+                </form>
+                {% endif %}
+    </div>
+    {% empty %}
+    <span style="color:red;">There are no opinions for this product.</span>
+    {% endfor %}
+</div>
+{% endblock %}

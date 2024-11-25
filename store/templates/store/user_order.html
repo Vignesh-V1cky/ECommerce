@@ -1,0 +1,51 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+<div class="container pt-3 min-vh-100">
+    <h4>Order number: #{{ order.pk }}</h4>
+    <hr class="hr" />
+    <div class="card">
+        <div class="card-body">
+            <ul class="list-inline">
+              <p>Date/time: {{ order.date_time_order }}</p>
+              <p>Delivery method: {{ order.get_delivery_method_order_display }}</p>
+              <p>Payment method: {{ order.get_payment_method_order_display }}</p>
+              <p>Delivery address: {{ order.country_order }}, {{ order.city_order }}, {{  order.street_order }} {{  order.house_number_order }}, {{  order.zip_code_order }}</p>
+              <p>Ordering person: {{ order.first_name_order }} {{ order.last_name_order }}, {{ order.email_order }}, {{ order.phone_number_order }}</p>
+            </ul>
+        </div>
+    </div>
+    <table class="table table-bordered my-3">
+        <thead>
+            <tr>
+                <th class="col">Product</th>
+                <th class="col">Price</th>
+                <th class="col">Quantity</th>
+                <th class="col">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in order_products %}
+            <tr>
+                <td>
+                    <a class="text-decoration-none text-primary" href="{% url 'product' item.product.pk %}">{{ item.product.name }}</a>
+                </td>
+                <td>${{ item.product.price }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>${{ item.get_total }}</td>
+              
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="card my-3">
+        <div class="card-body">
+              <span>Total: ${{ cart_total|floatformat:2 }}</span> 
+        </div>
+    </div>
+
+    <a class="btn btn-outline-primary" href="{% url 'profile' %}">Back</a>
+
+</div>
+{% endblock %}

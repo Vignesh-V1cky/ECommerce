@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ecommerce App</title>
+    <link rel="stylesheet" href="{% static 'store/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
+            <div class="header">
+                        <a class="navbar-brand" href="{% url 'home' %}" style="color:white">Ecommerce App</a>
+                        <form method="POST" action="{% url 'search' %}" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="input-group">
+                                <input name="searched" type="text" class="form-control" placeholder="  Search...">
+                                <span class="input-group-append">
+                                    <button class="btn btn-outline-primary"><span class="fas fa-search" style="padding-right:5px"></span>Search</button>
+                                </span>
+                            </div>
+                        </form>
+                    <nav class="fas">
+                        <a class="fas fa-user" href="{% url 'profile' %}" style="color: white"></a>
+                        <a class="fas fa-shopping-cart" href="{% url 'cart' %}" style="color: white"></a>
+                    </nav>
+        </div>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+
+    <script>
+        var images = document.getElementsByClassName("slide");
+        var imgpos = 0;
+        function slider()
+        {
+            images[imgpos].style.display="none";
+            imgpos = [imgpos+1]%images.length;
+            images[imgpos].style.display="block";
+        }
+        setInterval(slider,3000);
+
+    </script>
+</body>
+</html>
